@@ -1,0 +1,29 @@
+version: "3.0"
+
+services:
+    mysql: 
+        image: mysql
+        command: --default-authentication-plugin=mysql_native_password
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: ace_direct
+            MYSQL_DATABASE: ace_direct
+    kurento:
+        image: 'kurento/kurento-media-server:6.10'
+        environment:
+            KMS_TURN_URL: '${TURN_USER}:${TURN_PASS}@${TURN_URL}'
+        ports:
+            - 8888:8888
+            - 8433:8433
+        volumes:
+            - /tmp:/tmp
+    ace-direct:
+        build:
+            context: .
+        #command: bash -c "npm run sequelize db:migrate"
+        depends_on:
+            - mysql
+            - kurento
+        ports:
+            - 8443:8443

@@ -1,0 +1,15 @@
+.env
+node_modules
+.tmp
+*.iml
+out
+gen
+.node_history
+static/bower_components/*
+src/config
+# IntelliJ project files
+.idea
+# ACEKurento-js extras
+ACEKurento-js/.idea
+ACEKurento-js/coverage
+ACEKurento-js/node_modules

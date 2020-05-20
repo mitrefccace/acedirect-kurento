@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="shortcut icon" href="img/kurento.png" type="image/png"/>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="bower_components/demo-console/index.css">
+  <link rel="stylesheet" href="css/kurento.css">
+
+  <script src="bower_components/adapter.js/release/adapter.js"></script>
+  <script src="bower_components/demo-console/index.js"></script>
+  <script src="bower_components/draggabilly/dist/draggabilly.pkgd.min.js"></script>
+  <script src="js/ACEKurento-1.0.0.js"></script>
+  <script src="js/index.js"></script>
+  <title>WebRTC - SIP Kurento Call</title>
+</head>
+<body>
+
+  <header>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="collapse navbar-collapse"
+        id="bs-example-navbar-collapse-1">
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="page-header">
+    <h1>WebRTC - SIP Kurento Call</h1>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="sip-container" id="sip-usr">
+            <label class="control-label" for="ext">Extension</label>
+            <input id="ext" name="ext" class="form-control" type="text" value="7779"/>
+            <label class="control-label" for="password">Password</label>
+            <input id="password" name="password" class="form-control" type="password" value="7779"/>
+            <div class="mx-2">
+              <label class="control-label">
+                <input type="checkbox" id="isAgent" checked> Are you an Agent?
+                <span class="fa fa-info-circle" title="As an agent you will be assigned as a queue member to receive calls from consumers"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 text-right">
+          <a id="loopback" href="#" class="btn btn-primary" style="margin-top: 5px">
+            <span class="fa fa-repeat"></span> Loopback
+          </a>
+          <a id="register" href="#" class="btn btn-primary" style="margin-top: 5px">
+            <span class="fa fa-plus"></span> Register
+          </a>
+          <br><br>
+          <span id="agentAwayConf" class="switch invisible">
+            <input type="checkbox" class="switch" id="agentAway">
+            <label for="agentAway">AWAY</label>
+          </span>
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="sip-container" id="sip-peer">
+            <label class="control-label" for="peer">Peer</label>
+            <input id="peer" name="peer" class="form-control" type="text" value="99002"/>
+          </div>
+        </div>
+        <div class="call-controls col-md-12 text-right" style="margin-top: 5px;">
+          <div class="row">
+            <div class="col-md-4">
+              <a id="call" href="#" class="btn btn-success">
+                <span class="fa fa-play"></span> Call
+              </a>
+            </div>
+            <div class="col-md-4">
+              <a id="invite" href="#" class="btn btn-info">
+                <span class="fa fa-play"></span> Invite
+              </a>
+            </div>
+            <div class="col-md-4">
+              <a id="terminate" href="#" class="btn btn-danger">
+                <span class="fa fa-stop"></span> Stop
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="call-controls col-md-12 text-right" style="margin-top: 5px;">
+          <div class="row">
+            <div class="col-md-4">
+              <a id="hold" href="#" class="btn btn-info">
+                <span class="fa fa-pause"></span> <span id="hold-lbl">Hold</span>
+              </a>
+            </div>
+            <div class="col-md-4">
+              <a id="record" href="#" class="btn btn-info">
+                <span class="fa fa-circle"></span> <span>Record</span>
+              </a>
+            </div>
+            <div class="col-md-4">
+              <a id="private" href="#" class="btn btn-info">
+                <span class="fa fa-lock"></span> <span>Private</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="call-controls col-md-12 text-right" style="margin-top: 5px;">
+          <div class="row">
+            <div class="col-md-4">
+              <a id="sipReinvite" href="#" class="btn btn-info">
+                <span class="fa fa-arrow-right"></span> <span>SIP Re-Invite</span>
+              </a>
+            </div>
+            <div class="col-md-4">
+              <a id="screenShare" href="#" class="btn btn-info">
+                <span class="fa fa-square"></span> <span>Sc. Share</span>
+              </a>
+            </div>
+            <div class="col-md-4">
+              <a id="transfer" href="#" class="btn btn-info">
+                <span class="fa fa-play"></span> <span>Transfer</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div>
+        <label>
+          <input type="checkbox" id="audioChk" checked>
+          Enable/Disable AUDIO track
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" id="videoChk" checked>
+          Enable/Disable VIDEO track
+        </label>
+      </div>
+      <div>
+        <label>
+          <input type="checkbox" id="skipQueue" checked>
+          Skip call queue (WebRTC - WebRTC)
+        </label>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <div id="videoBig">
+        <video id="videoOutput" autoplay width="640px" height="480px" poster="img/webrtc.png"></video>
+      </div>
+      <div id="videoSmall">
+        <video id="videoInput" autoplay width="240px" height="180px" poster="img/webrtc.png"></video>
+      </div>
+      <ul id="participants" style="padding-top: 10px">
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div id="prompt" style="background-color: #dedede; padding: 5px; display: flex; justify-content: space-between; visibility: hidden; margin: 10px 0">
+        <h3 style="margin: 0; padding: 0; line-height: 1.5">
+          Incoming call from <span id="from"></span>
+        </h3>
+        <div class="pull-right">
+          <button id="accept" class="btn btn-success ">Accept</button>
+          <button id="reject" class="btn btn-danger " style="margin-left: 5px">Reject</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label class="control-label" for="console">Console</label><br><br>
+      <div id="console" class="democonsole">
+        <ul></ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-fixed-bottom">
+    <div class="container text-center">
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+version: "3.0"
+
+services:
+    asterisk: 
+        image: 'dougbtv/asterisk14'
+        network_mode: host
+        ports:
+            - 8089:8089
+            - "5060:5060/udp"
+        volumes:
+            - ./confs/asterisk/:/etc/asterisk/
+        command: asterisk -f

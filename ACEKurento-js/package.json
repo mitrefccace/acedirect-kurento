@@ -1,0 +1,31 @@
+{
+  "name": "ACEKurento",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": "^10.13.0"
+  },
+  "scripts": {
+    "test": "grunt test",
+    "patch": "grunt build-version:patch",
+    "minor": "grunt build-version:minor",
+    "major": "grunt build-version:major"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.4",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-karma": "^3.0.2",
+    "jasmine-core": "^3.3.0",
+    "jit-grunt": "^0.10.0",
+    "karma": "^4.1.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.1",
+    "karma-firefox-launcher": "^1.1.0",
+    "karma-jasmine": "^2.0.0",
+    "karma-script-launcher": "1.0.0",
+    "karma-spec-reporter": "0.0.32",
+    "karma-story-reporter": "^0.2.2",
+    "jsdoc": "^3.6.2"
+  }
+}
