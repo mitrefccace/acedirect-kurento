@@ -26,9 +26,13 @@
   var MEDIA_CONSTRAINTS = {
     audio: true,
     video: {
-      width: 640,
-      framerate: 15
-    }
+         minWidth: 320,
+         minHeight: 240,
+         maxWidth: 1280,
+         maxHeight: 720,
+         minFrameRate: 12,
+         maxFrameRate: 30  
+  	}
   };
   var ua = window && window.navigator ? window.navigator.userAgent : '';
   var parser = new UAParser(ua);
@@ -215,7 +219,8 @@
       var candidate = event.candidate;
       if (EventEmitter.listenerCount(self, 'icecandidate') || EventEmitter.listenerCount(self, 'candidategatheringdone')) {
         if (candidate) {
-          var cand;
+	setTimeout(function() {    
+        var cand;
           if (multistream && usePlanB) {
             cand = interop.candidateToUnifiedPlan(candidate);
           } else {
@@ -223,7 +228,9 @@
           }
           self.emit('icecandidate', cand);
           candidategatheringdone = false;
-        } else if (!candidategatheringdone) {
+        }, 2000); 
+	logger.debug('ICE Candidate TIMEOUT', candidate);
+	else if (!candidategatheringdone) {
           self.emit('candidategatheringdone');
           candidategatheringdone = true;
         }
@@ -522,12 +529,14 @@
         if (dc.signalingState === 'closed')
           return;
         dc.close();
+	console.log("Current dc signalingState: " + dc.signalingState);
       }
       if (pc) {
         if (pc.signalingState === 'closed')
           return;
         pc.getLocalStreams().forEach(streamStop);
         pc.close();
+	console.log("Current pc signalingState: " + pc.signalingState);
       }
     } catch (err) {
       logger.warn('Exception disposing webrtc peer ' + err);
@@ -983,13 +992,11 @@
   module.exports = freeice;
 },{"./stun.json":6,"./turn.json":7,"normalice":12}],6:[function(require,module,exports){
   module.exports=[
-    "stun.l.google.com:19302",
-    "stun1.l.google.com:19302",
-    "stun2.l.google.com:19302"
+    "stun.task3acrdemo.com:3478"
   ]
 
 },{}],7:[function(require,module,exports){
-  module.exports=[]
+  module.exports=[{"url":"turn:coturn.task3acrdemo.com","username":"turn","credential":"turn123"}]
 
 },{}],8:[function(require,module,exports){
   var WildEmitter = require('wildemitter');
