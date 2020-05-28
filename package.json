@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "DEBUG=ace:*,JsSIP:* nodemon --watch src --exec node src/index",
+    "build": "node ./build.js",
     "postinstall": "cd static && bower install",
     "sequelize": "sequelize",
     "bower": "cd static && bower install"

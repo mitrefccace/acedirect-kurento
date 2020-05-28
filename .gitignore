@@ -13,3 +13,5 @@ src/config
 ACEKurento-js/.idea
 ACEKurento-js/coverage
 ACEKurento-js/node_modules
+*.swp
+.DS_Store
