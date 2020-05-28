@@ -1,0 +1,69 @@
+{
+  "webserver": {
+    "port": listenerport,
+    "cert":"/path/to/cert",
+    "key": "/path/to/key",
+    "csr": "/path/to/csr",
+    "static": "./static",
+    "token": "__DEV_TOKEN__"
+  },
+  "asterisk": {
+    "protocol": "wss",
+    "host": "FQDN",
+    "port": listenerport,
+    "ip": "internalIP",
+    "sip_media_request_interval": 5000,
+    "ami": {
+      "ip": "internalIP",
+      "enabled": true,
+      "id": "username",
+      "passwd": "password",
+      "port": "listernerport",
+      "queue_names": ["GeneralQuestionsQueue","ComplaintsQueue"],
+      "queue_extensions": ["575781","575791"]
+    }
+  },
+  "kurento": {
+    "url": "wss://fqdn:port/kurento",
+    "stats_interval": 10000,
+    "sdes_crypto": "AES_128_CM_HMAC_SHA1_80",
+    "monitoring_enabled": false,
+    "recording_all_enabled": false,
+    "recording_media_profile": "MP4",
+    "recording_limit_length_in_sec": 30,
+    "video_webrtc_max_bitrate": 8000,
+    "video_webrtc_min_bitrate": 250,
+    "video_rtp_max_bitrate": 8000,
+    "video_webrtc_codec": "H264",
+    "_comment" : "profile-level-id=42001F;packetization-mode=0;level-asymmetry-allowed=1",
+    "h264_config": "",
+    "aws": {
+      "s3": {
+        "key": "{$AWS_KEY}",
+        "secret": "{$AWS_SECRET}",
+        "region": "{$AWS_BUCKET_REGION}",
+        "bucket": "{$AWS_BUCKET_NAME}"
+      }
+    },
+    "conference_max_participants": 4
+  },
+    "ice": [
+    {
+      "urls": "stun:fqdn:port"
+    },
+    {
+      "urls": "turn:fqdn:port",
+      "username": "username",
+      "credential": "password"
+    }
+  ],
+  "videomail": {
+    "directory": "/tmp/videomail/",
+    "instructions_media": [
+      "/tmp/videomail/instructions/video.mp4",
+      "/tmp/videomail/instructions/final.jpg"
+    ],
+    "media_profile": "MP4"
+  }
+}
+

@@ -6,7 +6,6 @@ out
 gen
 .node_history
 static/bower_components/*
-src/config
 # IntelliJ project files
 .idea
 # ACEKurento-js extras
