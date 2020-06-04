@@ -230,7 +230,7 @@
           candidategatheringdone = false;
         }, 2000); 
 	logger.debug('ICE Candidate TIMEOUT', candidate);
-	else if (!candidategatheringdone) {
+}	else if (!candidategatheringdone) {
           self.emit('candidategatheringdone');
           candidategatheringdone = true;
         }
