@@ -24,8 +24,6 @@ function execCommand(cmd,wdir) {
 
 async function go() {
 
-  s = await execCommand('rm ACEKurento-js/package-lock.json call-metrics/package-lock.json vendor/kurento-client-js/package-lock.json vendor/kurento-jsonrpc/package-lock.json vendor/reconnect-ws/package-lock.json package-lock.json  >/dev/null  # removing package lock files for regen ','.');
-
   s = await execCommand('rm -rf node_modules >/dev/null  # removing node_modules','.');
   s = await execCommand('rm -rf vendor/kurento-client-js/node_modules >/dev/null  # removing node_modules','.');
   s = await execCommand('rm -rf vendor/kurento-jsonrpc/node_modules >/dev/null  # removing node_modules','.');
@@ -44,9 +42,11 @@ async function go() {
 
   console.log('');
   console.log('TODO:');
-  console.log('configure these files: confs/kurento/WebRtcEndpoint.conf.ini, src/config/db.js, src/config/development.json');
+  console.log('cp  confs/kurento/WebRtcEndpoint.conf.ini_TEMPLATE  confs/kurento/WebRtcEndpoint.conf.ini  # then CONFIGURE IT!');
+  console.log('cp  src/config/db.js_TEMPLATE   src/config/db.js  # then CONFIGURE IT!');
+  console.log('cp  src/config/development.json_TEMPLATE  src/config/development.json_TEMPLATE  # then CONFIGURE IT!');
   console.log('npm run sequelize db:migrate');
-  console.log('Run it: npm run dev  OR  pm2 start process.json\n');
+  console.log('npm run dev   # to start, or run   pm2 start process.json\n');
   console.log('');
 }
 
