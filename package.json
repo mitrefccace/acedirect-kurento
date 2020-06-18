@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "DEBUG=ace:*,JsSIP:* nodemon --watch src --exec node src/index",
     "build": "node ./build.js",
+    "build2": "node ./build2.js",
     "postinstall": "cd static && bower install",
     "sequelize": "sequelize",
     "bower": "cd static && bower install"
@@ -19,7 +20,9 @@
     "express": "^4.16.4",
     "jssip": "^3.2.15",
     "jssip-node-websocket": "^3.0.0",
+    "kind-of": "^6.0.3",
     "kurento-client": "./vendor/kurento-client-js",
+    "minimist": "^1.2.3",
     "mysql2": "^1.6.4",
     "param": "^1.1.0",
     "passport": "^0.4.0",
