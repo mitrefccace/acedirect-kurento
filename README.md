@@ -17,7 +17,7 @@ A Web and signaling server application that uses Kurento Media Server to make/re
 
 #### NPM Build/Run
 
-1. `npm run build`
+1. `npm run build` , but if npm hangs, try the yarn build instead `npm run build2`
 1. Configure these files: `confs/kurento/WebRtcEndpoint.conf.ini`, `src/config/db.js`, `src/config/development.json`
 1. npm run sequelize db:migrate
 1. `npm run dev  # run it!`

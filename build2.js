@@ -36,9 +36,9 @@ async function go() {
 
   s = await execCommand('npm run bower  ','.');
 
-  s = await execCommand('npm install  ','./vendor/kurento-client-js');
-  s = await execCommand('npm install  ','./vendor/kurento-jsonrpc');
-  s = await execCommand('npm install  ','./vendor/reconnect-ws');
+  s = await execCommand('yarn install  ','./vendor/kurento-client-js');
+  s = await execCommand('yarn install  ','./vendor/kurento-jsonrpc');
+  s = await execCommand('yarn install  ','./vendor/reconnect-ws');
 
   console.log('');
   console.log('TODO:');
@@ -49,5 +49,9 @@ async function go() {
   console.log('npm run dev   # to start, or run   pm2 start process.json\n ; ');
   console.log('');
 }
+
+console.log(' ');
+console.log('This requires yarn. Make sure you: sudo npm install -g yarn   first');
+console.log(' ');
 
 go(); //MAIN
