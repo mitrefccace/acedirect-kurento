@@ -22,6 +22,8 @@ const replaceMediaEl = async (el, oldEl, newEl) => {
   await newEl.connect(el);
 };
 
+var kurento = null;
+
 const ASTERISK_QUEUE_EXT = param('asterisk.ami.queue_extensions');
 
 
@@ -61,7 +63,12 @@ class WebRTCMediaSession extends Events {
   async init() {
     debug('Initializing WebRTC session');
     try {
-      const kurento = await util.getKurentoClient(param('kurento.url'), 5000);
+
+      if (kurento == null) {
+        debug('CREATING KURENTO');
+        kurento = await util.getKurentoClient(param('kurento.url'), 5000);
+      }
+
       if (!kurento) throw new Error(`Can't create kurento client`);
       this._pipeline = await kurento.create('MediaPipeline');
       await this._pipeline.setLatencyStats(true);
@@ -512,10 +519,10 @@ class WebRTCMediaSession extends Events {
 
     // disconnect asterisk queue finding extension
     // and return to use webrtc directly
+    // REMOVED: return to fix ace quill audio issues
     if (ASTERISK_QUEUE_EXT && ASTERISK_QUEUE_EXT.indexOf(ext) >= 0) {
       debug(`${ext} Re-invite`, offer);
       await this.leave(ext, true);
-      return;
     }
 
     const rtp = await this._createRtpEndpoint();
