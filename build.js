@@ -40,13 +40,18 @@ async function go() {
   s = await execCommand('npm install  ','./vendor/kurento-jsonrpc');
   s = await execCommand('npm install  ','./vendor/reconnect-ws');
 
+  //copy config files if they don't exist
+  s = await execCommand('cp -n WebRtcEndpoint.conf.ini_TEMPLATE WebRtcEndpoint.conf.ini','./confs/kurento');
+  s = await execCommand('cp -n development.json_TEMPLATE development.json','./src/config');
+  s = await execCommand('cp -n db.js_TEMPLATE db.js','./src/config');
+
   console.log('');
   console.log('TODO:');
-  console.log('cp  confs/kurento/WebRtcEndpoint.conf.ini_TEMPLATE  confs/kurento/WebRtcEndpoint.conf.ini  # then CONFIGURE IT! ; ');
-  console.log('cp  src/config/db.js_TEMPLATE   src/config/db.js  # then CONFIGURE IT! ; ');
-  console.log('cp  src/config/development.json_TEMPLATE  src/config/development.json  # then CONFIGURE IT! ; ');
-  console.log('npm run sequelize db:migrate ; ');
-  console.log('npm run dev   # to start, or run   pm2 start process.json\n ; ');
+  console.log('Edit/configure confs/kurento/WebRtcEndpoint.conf.ini ');
+  console.log('Edit/configure src/config/db.js ');
+  console.log('Edit/configure src/config/development.json ');
+  console.log('npm run sequelize db:migrate  ');
+  console.log('npm run dev   # to start, or run with PM2: pm2 start process.json  ');
   console.log('');
 }
 
