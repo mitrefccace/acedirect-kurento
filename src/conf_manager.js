@@ -287,7 +287,6 @@ class ConfManager extends Events {
       this._calls.delete(calleeExt);
     });
     await call.init();
-
     if(skipQueue && callee) {
       debug('Starting WebRTC session %s -> %s', caller.ext, calleeExt);
       await call.addWebrtcPeer(caller, callerOffer, bitrates);
@@ -312,7 +311,8 @@ class ConfManager extends Events {
         from: caller.ext,
         to: calleeExt
       });
-      const session = caller.ua.call(calleeExt, {
+     var pfuInt; 
+     const session = caller.ua.call(calleeExt, {
         eventHandlers: this.callEventHandlers(caller.ext, calleeExt),
         mediaConstraints: { audio: true, video: true },
         rtcOfferConstraints: rtpOffer,
@@ -332,12 +332,38 @@ class ConfManager extends Events {
           call.leave(calleeExt);
         }
       });
+      session.on('confirmed', evt => {
+        this._calls.set(calleeExt, call);
+
+setTimeout(()=>{
+// force pfu at start of the call
+    let body = `<?xml version="1.0" encoding="utf-8" ?>
+  <media_control>
+    <vc_primitive>
+      <to_encoder>
+        <picture_fast_update/>
+      </to_encoder>
+    </vc_primitive>
+  </media_control>`;
+
+  session.sendInfo('application/media_control+xml', body)
+
+  pfuInt = setInterval(()=>{session.sendInfo('application/media_control+xml', body)},5000)
+},1000);
+// end
+ });
+
+
+
       session.on('accepted', evt => {
         this._calls.set(calleeExt, call);
+
         call.on('finished', () => {
           this._calls.delete(calleeExt);
+          clearInterval(pfuInt)
         })
         call.handleRtpAnswer(calleeExt, evt.response.body, session);
+	
       });
     }
     return call;
@@ -346,8 +372,8 @@ class ConfManager extends Events {
   callEventHandlers(from, to) {
     return {
       progress: () => {
-        debug('[%s -> %s] Call is in progress', from, to);
-      },
+       debug('[%s -> %s] Call is in progress', from, to);
+     },
       confirmed: () => {
         debug('[%s -> %s] Call confirmed', from, to);
       },
