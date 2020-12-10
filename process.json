@@ -5,6 +5,7 @@
     "script": "src/index.js",
     "cwd": "./acedirect-kurento",
     "restart_delay": 5000,
+    "autorestart": false,
     "out_file": "./logs/pm2-server-db.log",
     "error_file": "./logs/pm2-server-db-error.log"
   }

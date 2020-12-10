@@ -28,6 +28,7 @@ async function go() {
   s = await execCommand('rm -rf vendor/kurento-client-js/node_modules >/dev/null  # removing node_modules','.');
   s = await execCommand('rm -rf vendor/kurento-jsonrpc/node_modules >/dev/null  # removing node_modules','.');
   s = await execCommand('rm -rf vendor/reconnect-ws/node_modules >/dev/null  # removing node_modules','.');
+  s = await execCommand('sleep 5  # pause before npm install... ','.');
   s = await execCommand('which yarn >/dev/null  ','.');
 
   s = await execCommand('npm install   # main install','.');
@@ -37,7 +38,7 @@ async function go() {
 
   s = await execCommand('npm run bower  ','.');
 
-  s = await execCommand('sudo npm install -g yarn  ','.');
+  console.log('Make sure yarn is installed: sudo su - root ; npm install -g yarn');
   s = await execCommand('yarn install  ','./vendor/kurento-client-js');
   s = await execCommand('yarn install  ','./vendor/kurento-jsonrpc');
   s = await execCommand('yarn install  ','./vendor/reconnect-ws');

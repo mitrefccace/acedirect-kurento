@@ -28,6 +28,7 @@ async function go() {
   s = await execCommand('rm -rf vendor/kurento-client-js/node_modules >/dev/null  # removing node_modules','.');
   s = await execCommand('rm -rf vendor/kurento-jsonrpc/node_modules >/dev/null  # removing node_modules','.');
   s = await execCommand('rm -rf vendor/reconnect-ws/node_modules >/dev/null  # removing node_modules','.');
+  s = await execCommand('sleep 5  # pause before npm install... ','.');
 
   s = await execCommand('npm install   # main install','.');
 

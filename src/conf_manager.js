@@ -332,6 +332,9 @@ class ConfManager extends Events {
           call.leave(calleeExt);
         }
       });
+
+
+/*
       session.on('confirmed', evt => {
         this._calls.set(calleeExt, call);
 
@@ -352,6 +355,7 @@ setTimeout(()=>{
 },1000);
 // end
  });
+*/
 
 
 
@@ -360,7 +364,7 @@ setTimeout(()=>{
 
         call.on('finished', () => {
           this._calls.delete(calleeExt);
-          clearInterval(pfuInt)
+          //clearInterval(pfuInt)
         })
         call.handleRtpAnswer(calleeExt, evt.response.body, session);
 	
