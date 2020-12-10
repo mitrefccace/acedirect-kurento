@@ -5,7 +5,7 @@
   "dependencies": {
     "acorn": "^6.4.1",
     "chart.js": "^2.7.3",
-    "eslint-utils": "^1.4.3",
+    "eslint-utils": "^1.4.1",
     "handlebars": "^4.7.6",
     "js-yaml": "^3.13.1",
     "kind-of": "^6.0.3",
