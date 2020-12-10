@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "acorn": "^6.4.1",
+    "acorn": "^5.7.4",
     "chart.js": "^2.7.3",
     "eslint-utils": "^1.4.3",
     "handlebars": "^4.7.6",
